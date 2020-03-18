@@ -307,7 +307,7 @@ function updateUnlockedMasteryStudies() {
 
 function updateSpentableMasteryStudies() {
 	masterystudies.spentable=[]
-	addSpentablemasterystudies(241)
+	addSpentableMasteryStudies(241)
 }
 
 function addSpentableMasteryStudies(x) {
