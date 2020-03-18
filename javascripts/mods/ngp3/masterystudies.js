@@ -253,7 +253,7 @@ function updateMasteryStudyCosts() {
 	updateMasteryStudyTextDisplay()
 }
 
-function setupmasterystudies() {
+function setupMasteryStudies() {
 	masterystudies.studies=[241]
 	var map=masterystudies.studies
 	var part
