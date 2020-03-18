@@ -1915,9 +1915,9 @@ if (player.version < 5) {
       displayNonlegacyStuff()
       updateUnlockedMasteryStudies()
       updateSpentableMasteryStudies()
-      for (var i=0;i<masteryStudies.timeStudies.length;i++) {
-          var t=masteryStudies.timeStudies[i]
-          var d=masteryStudies.timeStudyDescs[t]
+      for (var i=0;i<masterystudies.timeStudies.length;i++) {
+          var t=masterystudies.timeStudies[i]
+          var d=masterystudies.timeStudyDescs[t]
           document.getElementById("ts"+t+"Desc").innerHTML=(typeof(d)=="function"?d():d)||"Unknown desc."
       }
       updateMasteryStudyCosts()
