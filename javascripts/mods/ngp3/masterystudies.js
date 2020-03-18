@@ -286,7 +286,7 @@ function setupMasteryStudies() {
 	}
 }
 
-function updateUnlockedmasterystudies() {
+function updateUnlockedMasteryStudies() {
 	var unl=true
 	var rowNum=0
 	masterystudies.unlocked=[]
@@ -305,12 +305,12 @@ function updateUnlockedmasterystudies() {
 	}
 }
 
-function updateSpentablemasterystudies() {
+function updateSpentableMasteryStudies() {
 	masterystudies.spentable=[]
 	addSpentablemasterystudies(241)
 }
 
-function addSpentablemasterystudies(x) {
+function addSpentableMasteryStudies(x) {
 	var map=[x]
 	var part
 	var pos=0
@@ -416,8 +416,8 @@ function buyMasteryStudy(type, id, quick=false) {
 				showTab("challenges")
 				showChallengesTab("eternitychallenges")
 			} else if (type=="d") {
-				updateUnlockedmasterystudies()
-				updateSpentablemasterystudies()
+				updateUnlockedMasteryStudies()
+				updateSpentableMasteryStudies()
 			}
 			updateMasteryStudyCosts()
 			updateMasteryStudyButtons()
