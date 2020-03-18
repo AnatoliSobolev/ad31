@@ -3312,7 +3312,7 @@ function ghostifyReset(implode, gain, amount, force) {
 	EPminpeakType = 'normal'
 	EPminpeak = new Decimal(0)
 	if (bm) {
-		if (player.eternityChallUnlocked>12) player.timestudy.theorem+=masteryStudies.costs.ec[player.eternityChallUnlocked]
+		if (player.eternityChallUnlocked>12) player.timestudy.theorem+=masterystudies.costs.ec[player.eternityChallUnlocked]
 		else player.timestudy.theorem+=([0,30,35,40,70,130,85,115,115,415,550,1,1])[player.eternityChallUnlocked]
 	} else performedTS=false
 	player.eternityChallUnlocked=0
@@ -3336,7 +3336,7 @@ function ghostifyReset(implode, gain, amount, force) {
 		player.masterystudies=[]
 		for (var t=0;t<all.length;t++) player.timestudy.studies.push(all[t])
 		for (var c=1;c<15;c++) player.eternityChalls["eterc"+c]=5
-		for (var t=0;t<masteryStudies.timeStudies.length;t++) player.masterystudies.push("t"+masteryStudies.timeStudies[t])
+		for (var t=0;t<masterystudies.timeStudies.length;t++) player.masterystudies.push("t"+masterystudies.timeStudies[t])
 		for (var d=1;d<7;d++) player.dilation.studies.push(d)
 		for (var d=7;d<15;d++) player.masterystudies.push("d"+d)
 		if (bm<2) {
