@@ -247,7 +247,7 @@ function updateMasteryStudyCosts() {
 		if (!masterystudies.unlocked.includes("d"+id)) break
 		setMasteryStudyCost(id,"d")
 	}
-	if (oldBought!=masterystudies.bought) updateSpentablemasterystudies()
+	if (oldBought!=masterystudies.bought) updateSpentableMasteryStudies()
 	if (player.eternityChallUnlocked>12) masterystudies.ttSpent+=masterystudies.costs.ec[player.eternityChallUnlocked]
 	if (masterystudies.bought>=48) giveAchievement("The Theory of Ultimate Studies")
 	updateMasteryStudyTextDisplay()
@@ -347,7 +347,7 @@ function buyMasteryStudy(type, id, quick=false) {
 			delete tmp.qu.autoECN
 		} else player.masterystudies.push(type+id)
 		if (type=="t") {
-			addSpentablemasterystudies(id)
+			addSpentableMasteryStudies(id)
 			if (id==302) maybeShowFillAll()
 			if (quick) {
 				masterystudies.costMult*=getMasteryStudyCostMult(id)
