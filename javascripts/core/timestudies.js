@@ -447,7 +447,7 @@ function respecTimeStudies(force, presetLoad) {
   }
   if (respecMastery) {
       var respecedMS=[]
-      player.timestudy.theorem+=masteryStudies.ttSpent
+      player.timestudy.theorem+=masterystudies.ttSpent
 	  if (player.masterystudies.includes("t373")) updateColorCharge()
       for (id=0;id<player.masterystudies.length;id++) {
           var d=player.masterystudies[id].split("d")[1]
