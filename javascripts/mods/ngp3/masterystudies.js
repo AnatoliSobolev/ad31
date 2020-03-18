@@ -1,4 +1,4 @@
-var masteryStudies = {
+var masterystudies = {
 	initCosts: {
 		time: {241: 2e71, 251: 5e71, 252: 5e71, 253: 5e71, 261: 2e71, 262: 2e71, 263: 2e71, 264: 2e71, 265: 2e71, 266: 2e71, 271: 2.7434842249657063e76, 272: 2.7434842249657063e76, 273: 2.7434842249657063e76, 281: 6.858710562414266e76, 282: 6.858710562414266e76, 291: 2.143347050754458e77, 292: 2.143347050754458e77, 301: 8.573388203017832e77, 302: 2.6791838134430725e78, 303: 8.573388203017832e77, 311: 8.573388203017832e77, 312: 8.573388203017832e77, 321: 2.6791838134430727e76, 322: 9.324815538194444e77, 323: 2.6791838134430727e76, 331: 1.0172526041666666e79, 332: 1.0172526041666666e79, 341: 9.5367431640625e78, 342: 1.0172526041666666e79, 343: 1.0172526041666666e79, 344: 9.5367431640625e78, 351: 2.1192762586805557e79, 361: 1.5894571940104167e79, 362: 1.5894571940104167e79, 371: 2.1192762586805557e79, 372: 6.622738308376736e79, 373: 2.1192762586805557e79, 381: 6.622738308376736e79, 382: 6.622738308376736e79, 383: 6.622738308376736e79, 391: 8.27842288547092e79, 392: 8.27842288547092e79, 393: 8.27842288547092e79, 401: 4.967053731282552e80, 402: 8.278422885470921e80, 411: 1.3245476616753473e71, 412: 1.655684577094184e71, 421: 1.9868214925130208e72, 431: 1.1037897180627893e75},
 		time_legacy: {241: 1e71, 251: 2e71, 252: 2e71, 253: 2e71, 261: 5e71, 262: 5e71, 263: 5e71, 264: 5e71, 265: 5e71, 266: 5e71},
@@ -27,10 +27,10 @@ var masteryStudies = {
 	ecReqsStored: {},
 	ecReqDisplays: {
 		13: function() {
-			return getFullExpansion(masteryStudies.ecReqsStored[13]) + " dimension boosts"
+			return getFullExpansion(masterystudies.ecReqsStored[13]) + " dimension boosts"
 		},
 		14: function() {
-			return getFullExpansion(masteryStudies.ecReqsStored[14]) + "% replicate chance"
+			return getFullExpansion(masterystudies.ecReqsStored[14]) + "% replicate chance"
 		}
 	},
 	unlockReqConditions: {
@@ -218,44 +218,44 @@ function convertMasteryStudyIdToDisplay(x) {
 }
 
 function updateMasteryStudyCosts() {
-	var oldBought=masteryStudies.bought
-	masteryStudies.latestBoughtRow=0
-	masteryStudies.costMult=1
-	masteryStudies.bought=0
-	masteryStudies.ttSpent=0
+	var oldBought=masterystudies.bought
+	masterystudies.latestBoughtRow=0
+	masterystudies.costMult=1
+	masterystudies.bought=0
+	masterystudies.ttSpent=0
 	for (id=0;id<player.masterystudies.length;id++) {
 		var t=player.masterystudies[id].split("t")[1]
 		if (t) {
 			setMasteryStudyCost(t,"t")
-			masteryStudies.ttSpent+=masteryStudies.costs.time[t]
-			masteryStudies.costMult*=getMasteryStudyCostMult(t)
-			masteryStudies.latestBoughtRow=Math.max(masteryStudies.latestBoughtRow,Math.floor(t/10))
-			masteryStudies.bought++
+			masterystudies.ttSpent+=masterystudies.costs.time[t]
+			masterystudies.costMult*=getMasteryStudyCostMult(t)
+			masterystudies.latestBoughtRow=Math.max(masterystudies.latestBoughtRow,Math.floor(t/10))
+			masterystudies.bought++
 		}
 	}
-	for (id=0;id<masteryStudies.timeStudies.length;id++) {
-		var name=masteryStudies.timeStudies[id]
-		if (!masteryStudies.unlocked.includes(name)) break
+	for (id=0;id<masterystudies.timeStudies.length;id++) {
+		var name=masterystudies.timeStudies[id]
+		if (!masterystudies.unlocked.includes(name)) break
 		if (!player.masterystudies.includes("t"+name)) setMasteryStudyCost(name,"t")
 	}
-	for (id=13;id<=masteryStudies.ecsUpTo;id++) {
-		if (!masteryStudies.unlocked.includes("ec"+id)) break
+	for (id=13;id<=masterystudies.ecsUpTo;id++) {
+		if (!masterystudies.unlocked.includes("ec"+id)) break
 		setMasteryStudyCost(id,"ec")
-		masteryStudies.ecReqsStored[id]=masteryStudies.ecReqs[id]()
+		masterystudies.ecReqsStored[id]=masterystudies.ecReqs[id]()
 	}
-	for (id=7;id<=masteryStudies.unlocksUpTo;id++) {
-		if (!masteryStudies.unlocked.includes("d"+id)) break
+	for (id=7;id<=masterystudies.unlocksUpTo;id++) {
+		if (!masterystudies.unlocked.includes("d"+id)) break
 		setMasteryStudyCost(id,"d")
 	}
-	if (oldBought!=masteryStudies.bought) updateSpentableMasteryStudies()
-	if (player.eternityChallUnlocked>12) masteryStudies.ttSpent+=masteryStudies.costs.ec[player.eternityChallUnlocked]
-	if (masteryStudies.bought>=48) giveAchievement("The Theory of Ultimate Studies")
+	if (oldBought!=masterystudies.bought) updateSpentablemasterystudies()
+	if (player.eternityChallUnlocked>12) masterystudies.ttSpent+=masterystudies.costs.ec[player.eternityChallUnlocked]
+	if (masterystudies.bought>=48) giveAchievement("The Theory of Ultimate Studies")
 	updateMasteryStudyTextDisplay()
 }
 
-function setupMasteryStudies() {
-	masteryStudies.studies=[241]
-	var map=masteryStudies.studies
+function setupmasterystudies() {
+	masterystudies.studies=[241]
+	var map=masterystudies.studies
 	var part
 	var pos=0
 	while (true) {
@@ -266,8 +266,8 @@ function setupMasteryStudies() {
 			id=part
 			part=""
 		}
-		if (typeof(id)=="number") masteryStudies.timeStudies.push(id)
-		var paths=masteryStudies.allConnections[id]
+		if (typeof(id)=="number") masterystudies.timeStudies.push(id)
+		var paths=masterystudies.allConnections[id]
 		if (paths) for (var x=0;x<paths.length;x++) {
 			var y=paths[x]
 			if (!map.includes(y)) {
@@ -277,49 +277,49 @@ function setupMasteryStudies() {
 		}
 		pos++
 	}
-	for (id=0;id<masteryStudies.timeStudies.length;id++) {
-		var name=masteryStudies.timeStudies[id]
+	for (id=0;id<masterystudies.timeStudies.length;id++) {
+		var name=masterystudies.timeStudies[id]
 		var html="<span id='ts"+name+"Desc'></span>"
-		if (masteryStudies.hasStudyEffect.includes(name)) html+="<br>Currently: <span id='ts"+name+"Current'></span>"
+		if (masterystudies.hasStudyEffect.includes(name)) html+="<br>Currently: <span id='ts"+name+"Current'></span>"
 		html+="<br>Cost: <span id='ts"+name+"Cost'></span> Time Theorems"
 		document.getElementById("timestudy"+name).innerHTML=html
 	}
 }
 
-function updateUnlockedMasteryStudies() {
+function updateUnlockedmasterystudies() {
 	var unl=true
 	var rowNum=0
-	masteryStudies.unlocked=[]
-	for (var x=0;x<masteryStudies.studies.length;x++) {
-		var id=masteryStudies.studies[x]
+	masterystudies.unlocked=[]
+	for (var x=0;x<masterystudies.studies.length;x++) {
+		var id=masterystudies.studies[x]
 		var divid=convertMasteryStudyIdToDisplay(id)
 		if (Math.floor(id/10)>rowNum) {
 			rowNum=Math.floor(id/10)
-			if (masteryStudies.allUnlocks["r"+rowNum]&&!masteryStudies.allUnlocks["r"+rowNum]()) unl=false
+			if (masterystudies.allUnlocks["r"+rowNum]&&!masterystudies.allUnlocks["r"+rowNum]()) unl=false
 			document.getElementById(divid).parentElement.parentElement.parentElement.parentElement.style=unl?"":"display: none !important"
-			if (unl) masteryStudies.unlocked.push("r"+rowNum)
+			if (unl) masterystudies.unlocked.push("r"+rowNum)
 		} else if (divid[0]=="d") document.getElementById(divid).parentElement.parentElement.parentElement.parentElement.style=unl?"":"display: none !important"
-		if (masteryStudies.allUnlocks[id]&&!masteryStudies.allUnlocks[id]()) unl=false
+		if (masterystudies.allUnlocks[id]&&!masterystudies.allUnlocks[id]()) unl=false
 		document.getElementById(divid).style.visibility=unl?"":"hidden"
-		if (unl) masteryStudies.unlocked.push(id)
+		if (unl) masterystudies.unlocked.push(id)
 	}
 }
 
-function updateSpentableMasteryStudies() {
-	masteryStudies.spentable=[]
-	addSpentableMasteryStudies(241)
+function updateSpentablemasterystudies() {
+	masterystudies.spentable=[]
+	addSpentablemasterystudies(241)
 }
 
-function addSpentableMasteryStudies(x) {
+function addSpentablemasterystudies(x) {
 	var map=[x]
 	var part
 	var pos=0
 	while (true) {
 		var id=map[pos]
 		if (!id) break
-		if (masteryStudies.unlocked.includes(id)&&!masteryStudies.spentable.includes(id)) masteryStudies.spentable.push(id)
+		if (masterystudies.unlocked.includes(id)&&!masterystudies.spentable.includes(id)) masterystudies.spentable.push(id)
 		if (player.masterystudies.includes(typeof(id)=="number"?"t"+id:id)) {
-			var paths=masteryStudies.allConnections[id]
+			var paths=masterystudies.allConnections[id]
 			if (paths) for (var x=0;x<paths.length;x++) map.push(paths[x])
 		}
 		pos++
@@ -327,19 +327,19 @@ function addSpentableMasteryStudies(x) {
 }
 
 function setMasteryStudyCost(id,type) {
-	let d=masteryStudies.initCosts
-	type=masteryStudies.types[type]
-	masteryStudies.costs[type][id]=((tmp.ngp3l&&d[type+"_legacy"][id])||d[type][id]||0)*masteryStudies.costMult
+	let d=masterystudies.initCosts
+	type=masterystudies.types[type]
+	masterystudies.costs[type][id]=((tmp.ngp3l&&d[type+"_legacy"][id])||d[type][id]||0)*masterystudies.costMult
 }
 
 function getMasteryStudyCostMult(id) {
-	return (tmp.ngp3l&&masteryStudies.costs.time_mults_legacy[id])||masteryStudies.costs.time_mults[id]||1
+	return (tmp.ngp3l&&masterystudies.costs.time_mults_legacy[id])||masterystudies.costs.time_mults[id]||1
 }
 
 function buyMasteryStudy(type, id, quick=false) {
 	if (quick) setMasteryStudyCost(id,type)
 	if (canBuyMasteryStudy(type, id)) {
-		player.timestudy.theorem-=masteryStudies.costs[masteryStudies.types[type]][id]
+		player.timestudy.theorem-=masterystudies.costs[masterystudies.types[type]][id]
 		if (type=='ec') {
 			player.eternityChallUnlocked=id
 			player.etercreq=id
@@ -347,11 +347,11 @@ function buyMasteryStudy(type, id, quick=false) {
 			delete tmp.qu.autoECN
 		} else player.masterystudies.push(type+id)
 		if (type=="t") {
-			addSpentableMasteryStudies(id)
+			addSpentablemasterystudies(id)
 			if (id==302) maybeShowFillAll()
 			if (quick) {
-				masteryStudies.costMult*=getMasteryStudyCostMult(id)
-				masteryStudies.latestBoughtRow=Math.max(masteryStudies.latestBoughtRow,Math.floor(id/10))
+				masterystudies.costMult*=getMasteryStudyCostMult(id)
+				masterystudies.latestBoughtRow=Math.max(masterystudies.latestBoughtRow,Math.floor(id/10))
 			}
 			if (id==241&&!GUBought("gb3")) {
 				var otherMults=1
@@ -411,13 +411,13 @@ function buyMasteryStudy(type, id, quick=false) {
 		if (!quick) {
 			if (type=="t") {
 				if (id==302) fillAll()
-				masteryStudies.bought++
+				masterystudies.bought++
 			} else if (type=="ec") {
 				showTab("challenges")
 				showChallengesTab("eternitychallenges")
 			} else if (type=="d") {
-				updateUnlockedMasteryStudies()
-				updateSpentableMasteryStudies()
+				updateUnlockedmasterystudies()
+				updateSpentablemasterystudies()
 			}
 			updateMasteryStudyCosts()
 			updateMasteryStudyButtons()
@@ -428,48 +428,48 @@ function buyMasteryStudy(type, id, quick=false) {
 
 function canBuyMasteryStudy(type, id) {
 	if (type=='t') {
-		if (inQCModifier("sm")&&masteryStudies.bought>=20) return false
-		if (player.timestudy.theorem<masteryStudies.costs.time[id]||player.masterystudies.includes('t'+id)||player.eternityChallUnlocked>12||!masteryStudies.timeStudies.includes(id)) return false
-		if (masteryStudies.latestBoughtRow>Math.floor(id/10)) return false
-		if (!masteryStudies.spentable.includes(id)) return false
+		if (inQCModifier("sm")&&masterystudies.bought>=20) return false
+		if (player.timestudy.theorem<masterystudies.costs.time[id]||player.masterystudies.includes('t'+id)||player.eternityChallUnlocked>12||!masterystudies.timeStudies.includes(id)) return false
+		if (masterystudies.latestBoughtRow>Math.floor(id/10)) return false
+		if (!masterystudies.spentable.includes(id)) return false
 	} else if (type=='d') {
-		if (player.timestudy.theorem<masteryStudies.costs.dil[id]||player.masterystudies.includes('d'+id)) return false
-		if (!ghostified && !(masteryStudies.unlockReqConditions[id] && masteryStudies.unlockReqConditions[id]())) return false
-		if (!masteryStudies.spentable.includes("d"+id)) return false
+		if (player.timestudy.theorem<masterystudies.costs.dil[id]||player.masterystudies.includes('d'+id)) return false
+		if (!ghostified && !(masterystudies.unlockReqConditions[id] && masterystudies.unlockReqConditions[id]())) return false
+		if (!masterystudies.spentable.includes("d"+id)) return false
 	} else {
-		if (player.timestudy.theorem<masteryStudies.costs.ec[id]||player.eternityChallUnlocked) return false
-		if (!masteryStudies.spentable.includes("ec"+id)) return false
+		if (player.timestudy.theorem<masterystudies.costs.ec[id]||player.eternityChallUnlocked) return false
+		if (!masterystudies.spentable.includes("ec"+id)) return false
 		if (player.etercreq==id) return true
-		if (id==13) return player.resets>=masteryStudies.ecReqsStored[13]
-		return Math.round(player.replicanti.chance*100)>=masteryStudies.ecReqsStored[14]
+		if (id==13) return player.resets>=masterystudies.ecReqsStored[13]
+		return Math.round(player.replicanti.chance*100)>=masterystudies.ecReqsStored[14]
 	}
 	return true
 }
 	
 function updateMasteryStudyButtons() {
 	if (!tmp.ngp3) return
-	for (id=0;id<masteryStudies.timeStudies.length;id++) {
-		var name=masteryStudies.timeStudies[id]
+	for (id=0;id<masterystudies.timeStudies.length;id++) {
+		var name=masterystudies.timeStudies[id]
 		var div=document.getElementById("timestudy"+name)
-		if (!masteryStudies.unlocked.includes(name)) break
+		if (!masterystudies.unlocked.includes(name)) break
 		if (player.masterystudies.includes("t"+name)) div.className="timestudybought"
 		else if (canBuyMasteryStudy('t', name)) div.className="timestudy"
 		else div.className="timestudylocked"
-		if (masteryStudies.hasStudyEffect.includes(name)) {
+		if (masterystudies.hasStudyEffect.includes(name)) {
 			var mult=getMTSMult(name, "ms")
-			document.getElementById("ts"+name+"Current").textContent=(masteryStudies.studyEffectDisplays[name]?masteryStudies.studyEffectDisplays[name](mult):shorten(mult)+"x")
+			document.getElementById("ts"+name+"Current").textContent=(masterystudies.studyEffectDisplays[name]?masterystudies.studyEffectDisplays[name](mult):shorten(mult)+"x")
 		}
 	}
-	for (id=13;id<=masteryStudies.ecsUpTo;id++) {
+	for (id=13;id<=masterystudies.ecsUpTo;id++) {
 		var div=document.getElementById("ec"+id+"unl")
-		if (!masteryStudies.unlocked.includes("ec"+id)) break
+		if (!masterystudies.unlocked.includes("ec"+id)) break
 		if (player.eternityChallUnlocked==id) div.className="eternitychallengestudybought"
 		else if (canBuyMasteryStudy('ec', id)) div.className="eternitychallengestudy"
 		else div.className="timestudylocked"
 	}
-	for (id=7;id<=masteryStudies.unlocksUpTo;id++) {
+	for (id=7;id<=masterystudies.unlocksUpTo;id++) {
 		var div=document.getElementById("dilstudy"+id)
-		if (!masteryStudies.unlocked.includes("d"+id)) break
+		if (!masterystudies.unlocked.includes("d"+id)) break
 		if (player.masterystudies.includes("d"+id)) div.className="dilationupgbought"
 		else if (canBuyMasteryStudy('d', id)) div.className="dilationupg"
 		else div.className="timestudylocked"
@@ -478,24 +478,24 @@ function updateMasteryStudyButtons() {
 
 function updateMasteryStudyTextDisplay() {
 	if (!player.masterystudies) return
-	document.getElementById("costmult").textContent=shorten(masteryStudies.costMult)
-	document.getElementById("totalmsbought").textContent=masteryStudies.bought
-	document.getElementById("totalttspent").textContent=shortenDimensions(masteryStudies.ttSpent)
-	for (id=0;id<masteryStudies.timeStudies.length;id++) {
-		var name=masteryStudies.timeStudies[id]
-		if (!masteryStudies.unlocked.includes(name)) break
-		document.getElementById("ts"+name+"Cost").textContent=shorten(masteryStudies.costs.time[name])
+	document.getElementById("costmult").textContent=shorten(masterystudies.costMult)
+	document.getElementById("totalmsbought").textContent=masterystudies.bought
+	document.getElementById("totalttspent").textContent=shortenDimensions(masterystudies.ttSpent)
+	for (id=0;id<masterystudies.timeStudies.length;id++) {
+		var name=masterystudies.timeStudies[id]
+		if (!masterystudies.unlocked.includes(name)) break
+		document.getElementById("ts"+name+"Cost").textContent=shorten(masterystudies.costs.time[name])
 	}
-	for (id=13;id<=masteryStudies.ecsUpTo;id++) {
-		if (!masteryStudies.unlocked.includes("ec"+id)) break
-		document.getElementById("ec"+id+"Cost").textContent="Cost: "+shorten(masteryStudies.costs.ec[id])+" Time Theorems"
+	for (id=13;id<=masterystudies.ecsUpTo;id++) {
+		if (!masterystudies.unlocked.includes("ec"+id)) break
+		document.getElementById("ec"+id+"Cost").textContent="Cost: "+shorten(masterystudies.costs.ec[id])+" Time Theorems"
 		document.getElementById("ec"+id+"Req").style.display=player.etercreq==id?"none":"block"
-		document.getElementById("ec"+id+"Req").textContent="Requirement: "+masteryStudies.ecReqDisplays[id]()
+		document.getElementById("ec"+id+"Req").textContent="Requirement: "+masterystudies.ecReqDisplays[id]()
 	}
-	for (id=7;id<=masteryStudies.unlocksUpTo;id++) {
-		if (!masteryStudies.unlocked.includes("d"+id)) break
-		var req=masteryStudies.unlockReqDisplays[id]&&masteryStudies.unlockReqDisplays[id]()
-		document.getElementById("ds"+id+"Cost").textContent="Cost: "+shorten(masteryStudies.costs.dil[id])+" Time Theorems"
+	for (id=7;id<=masterystudies.unlocksUpTo;id++) {
+		if (!masterystudies.unlocked.includes("d"+id)) break
+		var req=masterystudies.unlockReqDisplays[id]&&masterystudies.unlockReqDisplays[id]()
+		document.getElementById("ds"+id+"Cost").textContent="Cost: "+shorten(masterystudies.costs.dil[id])+" Time Theorems"
 		if (req) document.getElementById("ds"+id+"Req").innerHTML=ghostified||!req?"":"<br>Requirement: "+req
 	}
 	if (quantumed) document.getElementById("321effect").textContent=shortenCosts(new Decimal("1e430"))
@@ -555,11 +555,11 @@ function drawMasteryTree() {
 	if (document.getElementById("eternitystore").style.display === "none" || document.getElementById("masterystudies").style.display === "none" || player.masterystudies === undefined) return
 	occupied=[]
 	drawMasteryBranch("back", "timestudy241")
-	for (var x=0;x<masteryStudies.studies.length;x++) {
-		var id=masteryStudies.studies[x]
-		var paths=masteryStudies.allConnections[id]
-		if (!masteryStudies.unlocked.includes(id)) return
-		if (paths) for (var y=0;y<paths.length;y++) if (masteryStudies.unlocked.includes(paths[y])) drawMasteryBranch(convertMasteryStudyIdToDisplay(id), convertMasteryStudyIdToDisplay(paths[y]))
+	for (var x=0;x<masterystudies.studies.length;x++) {
+		var id=masterystudies.studies[x]
+		var paths=masterystudies.allConnections[id]
+		if (!masterystudies.unlocked.includes(id)) return
+		if (paths) for (var y=0;y<paths.length;y++) if (masterystudies.unlocked.includes(paths[y])) drawMasteryBranch(convertMasteryStudyIdToDisplay(id), convertMasteryStudyIdToDisplay(paths[y]))
 	}
 }
 
